@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/Tim0Cc/FullStackWebApp/issues"
   },
-  "homepage": "https://github.com/Tim0Cc/FullStackWebApp#readme"
+  "homepage": "https://github.com/Tim0Cc/FullStackWebApp#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0"
+  }
 }
