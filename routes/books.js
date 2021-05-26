@@ -1,8 +1,17 @@
 const express = require('express')
-const author = require('../models/author')
 const router = express.Router()
+const multer = require('multer')
+const path = require('path')
 const Book = require('../models/book')
+const uploadPath = path.join('public', Book.coverImageBasePath)
+const imageMimeTypes = ['images/jpeg', 'images/png', 'images/gif']
 const Author = require('../models/author')
+const upload = multer({
+  dest: uploadPath,
+  fileFilter: (req, file, callback) => {
+    callback(null,)
+  }
+})
 
 // Read books
 // GET All
@@ -31,7 +40,13 @@ router.get('/new', async (req, res) => {
 })
 // Create Book Route
 router.post('/', async (req, res) => {
-  res.send('Create Book')
+  const book = new Book({
+    title: req.body.title,
+    author: req.body.author,
+    publishDate: new Date(req.body.publishDate),
+    pageCount: req.body.pageCount,
+    description: req.body.description,
+  })
 })
 
 // Update Book
