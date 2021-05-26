@@ -9,7 +9,7 @@ const Author = require('../models/author')
 const upload = multer({
   dest: uploadPath,
   fileFilter: (req, file, callback) => {
-    callback(null,)
+    callback(null, imageMimeTypes.includes(file.mimetype))
   }
 })
 
@@ -39,7 +39,7 @@ router.get('/new', async (req, res) => {
   }
 })
 // Create Book Route
-router.post('/', async (req, res) => {
+router.post('/', upload.single('cover'), async (req, res) => {
   const book = new Book({
     title: req.body.title,
     author: req.body.author,
