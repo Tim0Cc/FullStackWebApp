@@ -1,6 +1,8 @@
 const express = require('express')
+const author = require('../models/author')
 const router = express.Router()
 const Book = require('../models/book')
+const Author = require('../models/author')
 
 // Read books
 // GET All
@@ -15,8 +17,17 @@ router.get('/', async (req, res) => {
   
   // Create new Book
   // New Book Route 
-router.get('/new', (req, res) => {
-  res.send('New Book')
+router.get('/new', async (req, res) => {
+  try {
+    const authors = await Author.find({})
+    const book = new Book()
+    res.render('books/new', {
+      authors: authors,
+      book: book
+    })
+  } catch {
+    res.redirect('/books')
+  }
 })
 // Create Book Route
 router.post('/', async (req, res) => {
